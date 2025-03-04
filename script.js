@@ -14,22 +14,6 @@ function toggleSidebar() {
     }
 }
 
-let book;
-let rendition;
-
-function toggleSidebar() {
-    const sidebar = document.getElementById("sidebar");
-    const epubList = document.getElementById("epub-list");
-
-    if (sidebar.classList.contains("expanded")) {
-        sidebar.classList.remove("expanded");
-        epubList.style.display = "none";
-    } else {
-        sidebar.classList.add("expanded");
-        epubList.style.display = "block";
-    }
-}
-
 function loadEpub(epubFile) {
     console.log(`🚀 Attempting to load ePub from: ${epubFile}`);
 
