@@ -32,7 +32,15 @@ function loadEpub(epubFile) {
     book = ePub(epubFile);
     rendition = book.renderTo("epub-viewer", { width: "100%", height: "100vh" });
 
-    rendition.display();
+    // Apply dark mode to ePub content
+    rendition.display().then(() => {
+        rendition.themes.register("dark", {
+            "body": { "background": "black", "color": "white" },
+            "p": { "color": "white" },
+            "h1, h2, h3, h4, h5, h6": { "color": "white" }
+        });
+        rendition.themes.select("dark");
+    });
 }
 
 function closeEpubViewer() {
@@ -45,6 +53,6 @@ function closeEpubViewer() {
     mainHeading.style.display = "block"; // Show heading again when closing ePub
 
     if (book) {
-        book.destroy(); // Unload the current book
+        book.destroy(); // Properly remove the ePub instance
     }
 }
