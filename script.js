@@ -15,16 +15,16 @@ function toggleSidebar() {
 }
 
 function loadEpub(epubFile) {
+    console.log(`🚀 Attempting to load ePub: ${epubFile}`);
     console.log("Checking if ePub.js is available:", typeof ePub);
-    console.log(`Attempting to load ePub: ${epubFile}`);
 
     const epubViewer = document.getElementById("epub-viewer");
     const mainHeading = document.getElementById("main-heading");
     const closeBtn = document.getElementById("close-btn");
 
     epubViewer.style.display = "block";
-    mainHeading.style.display = "none"; // Hide heading when an ePub is opened
-    closeBtn.style.display = "block"; // Show Close button
+    mainHeading.style.display = "none";
+    closeBtn.style.display = "block";
 
     if (book) {
         console.log("Destroying previous book instance...");
@@ -33,32 +33,33 @@ function loadEpub(epubFile) {
 
     try {
         book = ePub(epubFile);
-        console.log("Book object created successfully.");
+        console.log("✅ Book object created:", book);
 
         rendition = book.renderTo("epub-viewer", { width: "100%", height: "100vh" });
+        console.log("✅ Rendition object created:", rendition);
 
         rendition.display().then(() => {
-            console.log("ePub should now be displayed.");
-        }).catch(err => console.error("Error displaying ePub:", err));
+            console.log("✅ ePub should now be displayed.");
+        }).catch(err => console.error("❌ Error displaying ePub:", err));
 
         book.ready.then(() => {
-            console.log("Book is ready.");
-        }).catch(err => console.error("Error loading ePub file:", err));
+            console.log("✅ Book is ready.");
+        }).catch(err => console.error("❌ Error loading ePub file:", err));
 
         book.loaded.metadata.then(meta => {
-            console.log("Book Metadata Loaded:", meta);
-        }).catch(err => console.error("Metadata loading error:", err));
+            console.log("✅ Book Metadata Loaded:", meta);
+        }).catch(err => console.error("❌ Metadata loading error:", err));
 
         book.opened.then(() => {
-            console.log("Forcing book to display first chapter...");
+            console.log("✅ Forcing book to display first chapter...");
             rendition.display(book.spine.first());
-        });
-
+        }).catch(err => console.error("❌ Error displaying first chapter:", err));
 
     } catch (error) {
-        console.error("Failed to load ePub:", error);
+        console.error("❌ Failed to load ePub:", error);
     }
 }
+
 
 function closeEpubViewer() {
     console.log("Closing ePub viewer...");
