@@ -15,6 +15,7 @@ function toggleSidebar() {
 }
 
 function loadEpub(epubFile) {
+    console.log("Checking if ePub.js is available:", typeof ePub);
     console.log(`Attempting to load ePub: ${epubFile}`);
 
     const epubViewer = document.getElementById("epub-viewer");
