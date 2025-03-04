@@ -14,8 +14,21 @@ function toggleSidebar() {
     }
 }
 
+function nextPage() {
+    if (rendition) {
+        rendition.next();
+        console.log("➡ Next page");
+    }
+}
+
+function prevPage() {
+    if (rendition) {
+        rendition.prev();
+        console.log("⬅ Previous page");
+    }
+}
+
 function loadEpub(epubFile) {
-    // Check if epubFile is already a full URL or a local file
     const isFullUrl = epubFile.startsWith("http");
     const fullPath = isFullUrl ? epubFile : `/epubs/${epubFile}`;
 
@@ -23,6 +36,7 @@ function loadEpub(epubFile) {
 
     const epubViewer = document.getElementById("epub-viewer");
     const mainHeading = document.getElementById("main-heading");
+    const navButtons = document.getElementById("nav-buttons");
 
     if (!epubViewer) {
         console.error("❌ Error: epubViewer element not found!");
@@ -31,6 +45,7 @@ function loadEpub(epubFile) {
 
     epubViewer.style.display = "block";
     mainHeading.style.display = "none";
+    navButtons.style.display = "block"; // Show navigation buttons
 
     if (book) {
         console.log("Destroying previous book instance...");
@@ -51,6 +66,7 @@ function loadEpub(epubFile) {
         console.error("❌ Failed to load ePub:", error);
     }
 }
+
 
 
 function closeEpubViewer() {
