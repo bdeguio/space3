@@ -38,6 +38,14 @@ function loadEpub(epubFile) {
         rendition = book.renderTo("epub-viewer", { width: "100%", height: "100vh" });
         console.log("✅ Rendition object created:", rendition);
 
+        try {
+            book = ePub(epubFile);
+        if (!book) throw new Error("Book object is undefined.");
+            console.log("✅ Book object created:", book);
+        } catch (error) {
+            console.error("❌ Error creating book object:", error);
+        }
+
         rendition.display().then(() => {
             console.log("✅ ePub should now be displayed.");
         }).catch(err => console.error("❌ Error displaying ePub:", err));
