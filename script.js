@@ -15,6 +15,7 @@ function toggleSidebar() {
 }
 
 function loadEpub(epubFile) {
+    const fullPath = `/epubs/${epubFile}`;
     console.log(`🚀 Attempting to load ePub: ${epubFile}`);
     console.log("Checking if ePub.js is available:", typeof ePub);
 
