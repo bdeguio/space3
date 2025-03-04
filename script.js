@@ -58,3 +58,19 @@ function loadEpub(epubFile) {
         console.error("Failed to load ePub:", error);
     }
 }
+
+function closeEpubViewer() {
+    console.log("Closing ePub viewer...");
+    const epubViewer = document.getElementById("epub-viewer");
+    const mainHeading = document.getElementById("main-heading");
+    const closeBtn = document.getElementById("close-btn");
+
+    epubViewer.style.display = "none";
+    closeBtn.style.display = "none"; // Hide Close button
+    mainHeading.style.display = "block"; // Show heading again when closing ePub
+
+    if (book) {
+        console.log("Destroying ePub instance...");
+        book.destroy(); // Properly remove the ePub instance
+    }
+}
