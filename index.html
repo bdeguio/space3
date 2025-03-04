@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Black Webpage with Sidebar</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/epubjs@0.3.88/dist/epub.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/epubjs/dist/epub.min.js"></script>
 </head>
 <body class="dark-mode">
     <div class="sidebar" id="sidebar">
@@ -17,11 +17,10 @@
         <li id="close-btn" style="margin-top: 20px; color: red; font-weight: bold; cursor: pointer; text-align: left; padding-left: 10px;" onclick="closeEpubViewer()">Close</li>
     </div>
     <div class="main-content" id="main-content">
-        <h1 id="main-heading">||</h1>
-        <div id="epub-viewer" style="width: calc(100vw - 64px); height: 100vh; display: none; position: absolute; top: 0; left: 64px;"></div>
+        <h1 id="main-heading">Black Webpage with Sidebar</h1>
+        <div id="epub-viewer" style="width: calc(100vw - 64px); height: 100vh; display: none; position: absolute; top: 0; left: 64px; background: black; color: white;"></div>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
-
