@@ -1,0 +1,95 @@
+/* General Page Styling */
+body.dark-mode {
+    background-color: black;
+    color: white;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: 64px;
+    background-color: #1a1a1a;
+    height: 100%;
+    transition: width 0.3s;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    padding: 10px;
+}
+
+.sidebar.expanded {
+    width: 200px;
+}
+
+/* Sidebar Button */
+.menu-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+/* List Styling */
+#pdf-list {
+    display: none;
+    list-style: none;
+    padding: 10px;
+    width: 100%;
+}
+
+.sidebar.expanded #pdf-list {
+    display: block !important;
+}
+
+#pdf-list li {
+    margin-bottom: 10px;
+}
+
+#pdf-list a {
+    color: white;
+    text-decoration: none;
+}
+
+#pdf-list a:hover {
+    text-decoration: underline;
+}
+
+/* Close Button in Sidebar */
+#close-btn {
+    margin-top: 20px;
+    color: red;
+    font-weight: bold;
+    text-align: left;
+    cursor: pointer;
+    display: none;
+}
+
+#close-btn:hover {
+    text-decoration: underline;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    padding: 20px;
+}
+
+#epub-viewer {
+    width: calc(100vw - 64px);
+    height: 100vh;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 64px;
+    background: white; /* Ensures text is visible */
+}
