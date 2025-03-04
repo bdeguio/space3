@@ -15,7 +15,7 @@ function toggleSidebar() {
 }
 
 function loadEpub(epubFile) {
-    const fullPath = `/epubs/${epubFile}`;  // Updated path
+    const fullPath = `/ePubs/${epubFile}`;  // Updated path
     console.log(`🚀 Attempting to load ePub: ${fullPath}`);
 
     const epubViewer = document.getElementById("epub-viewer");
