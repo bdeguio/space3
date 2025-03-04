@@ -15,9 +15,8 @@ function toggleSidebar() {
 }
 
 function loadEpub(epubFile) {
-    const fullPath = `/epubs/${epubFile}`;
-    console.log(`🚀 Attempting to load ePub: ${epubFile}`);
-    console.log("Checking if ePub.js is available:", typeof ePub);
+    const fullPath = `/epubs/${epubFile}`;  // Updated path
+    console.log(`🚀 Attempting to load ePub: ${fullPath}`);
 
     const epubViewer = document.getElementById("epub-viewer");
     const mainHeading = document.getElementById("main-heading");
@@ -33,11 +32,10 @@ function loadEpub(epubFile) {
     }
 
     try {
-        book = ePub(epubFile);
+        book = ePub(fullPath);
         console.log("✅ Book object created:", book);
 
         rendition = book.renderTo("epub-viewer", { width: "100%", height: "100vh" });
-        console.log("✅ Rendition object created:", rendition);
 
         rendition.display().then(() => {
             console.log("✅ ePub should now be displayed.");
