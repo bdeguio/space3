@@ -14,17 +14,30 @@ function toggleSidebar() {
     }
 }
 
+let book;
+let rendition;
+
+function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    const epubList = document.getElementById("epub-list");
+
+    if (sidebar.classList.contains("expanded")) {
+        sidebar.classList.remove("expanded");
+        epubList.style.display = "none";
+    } else {
+        sidebar.classList.add("expanded");
+        epubList.style.display = "block";
+    }
+}
+
 function loadEpub(epubFile) {
-    const fullPath = `https://bdeguio.github.io/space3/ePubs/${epubFile}`;
-    console.log(`🚀 Attempting to load ePub from: ${fullPath}`);
+    console.log(`🚀 Attempting to load ePub from: ${epubFile}`);
 
     const epubViewer = document.getElementById("epub-viewer");
     const mainHeading = document.getElementById("main-heading");
-    const closeBtn = document.getElementById("close-btn");
 
     epubViewer.style.display = "block";
     mainHeading.style.display = "none";
-    closeBtn.style.display = "block";
 
     if (book) {
         console.log("Destroying previous book instance...");
@@ -32,7 +45,7 @@ function loadEpub(epubFile) {
     }
 
     try {
-        book = ePub(fullPath);
+        book = ePub(epubFile);
         console.log("✅ Book object created:", book);
 
         rendition = book.renderTo("epub-viewer", { width: "100%", height: "100vh" });
