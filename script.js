@@ -48,6 +48,12 @@ function loadEpub(epubFile) {
             console.log("Book Metadata Loaded:", meta);
         }).catch(err => console.error("Metadata loading error:", err));
 
+        book.opened.then(() => {
+            console.log("Forcing book to display first chapter...");
+            rendition.display(book.spine.first());
+        });
+
+
     } catch (error) {
         console.error("Failed to load ePub:", error);
     }
