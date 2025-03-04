@@ -15,6 +15,8 @@ function toggleSidebar() {
 }
 
 function loadEpub(epubFile) {
+    console.log(`Attempting to load ePub: ${epubFile}`);
+
     const epubViewer = document.getElementById("epub-viewer");
     const mainHeading = document.getElementById("main-heading");
     const closeBtn = document.getElementById("close-btn");
@@ -25,34 +27,25 @@ function loadEpub(epubFile) {
 
     // Clear existing book if already loaded
     if (book) {
+        console.log("Destroying previous book instance...");
         book.destroy();
     }
 
-    // Load new ePub book
-    book = ePub(epubFile);
-    rendition = book.renderTo("epub-viewer", { width: "100%", height: "100vh" });
+    try {
+        // Load new ePub book
+        book = ePub(epubFile);
+        console.log("Book object created successfully.");
 
-    // Apply dark mode to ePub content
-    rendition.display().then(() => {
-        rendition.themes.register("dark", {
-            "body": { "background": "black", "color": "white" },
-            "p": { "color": "white" },
-            "h1, h2, h3, h4, h5, h6": { "color": "white" }
-        });
-        rendition.themes.select("dark");
-    });
-}
+        rendition = book.renderTo("epub-viewer", { width: "100%", height: "100vh" });
+        console.log("Rendition object created successfully.");
 
-function closeEpubViewer() {
-    const epubViewer = document.getElementById("epub-viewer");
-    const mainHeading = document.getElementById("main-heading");
-    const closeBtn = document.getElementById("close-btn");
-
-    epubViewer.style.display = "none";
-    closeBtn.style.display = "none"; // Hide Close button
-    mainHeading.style.display = "block"; // Show heading again when closing ePub
-
-    if (book) {
-        book.destroy(); // Properly remove the ePub instance
-    }
-}
+        rendition.display().then(() => {
+            console.log("ePub should now be displayed.");
+            
+            // Register and apply dark mode theme
+            rendition.themes.register("dark", {
+                "body": { "background": "black", "color": "white" },
+                "p": { "color": "white" },
+                "h1, h2, h3, h4, h5, h6": { "color": "white" }
+            });
+            rendition.themes.sele
