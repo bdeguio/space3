@@ -25,27 +25,30 @@ function loadEpub(epubFile) {
     mainHeading.style.display = "none"; // Hide heading when an ePub is opened
     closeBtn.style.display = "block"; // Show Close button
 
-    // Clear existing book if already loaded
     if (book) {
         console.log("Destroying previous book instance...");
         book.destroy();
     }
 
     try {
-        // Load new ePub book
         book = ePub(epubFile);
         console.log("Book object created successfully.");
 
         rendition = book.renderTo("epub-viewer", { width: "100%", height: "100vh" });
-        console.log("Rendition object created successfully.");
 
         rendition.display().then(() => {
             console.log("ePub should now be displayed.");
-            
-            // Register and apply dark mode theme
-            rendition.themes.register("dark", {
-                "body": { "background": "black", "color": "white" },
-                "p": { "color": "white" },
-                "h1, h2, h3, h4, h5, h6": { "color": "white" }
-            });
-            rendition.themes.sele
+        }).catch(err => console.error("Error displaying ePub:", err));
+
+        book.ready.then(() => {
+            console.log("Book is ready.");
+        }).catch(err => console.error("Error loading ePub file:", err));
+
+        book.loaded.metadata.then(meta => {
+            console.log("Book Metadata Loaded:", meta);
+        }).catch(err => console.error("Metadata loading error:", err));
+
+    } catch (error) {
+        console.error("Failed to load ePub:", error);
+    }
+}
